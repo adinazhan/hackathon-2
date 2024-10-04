@@ -14,5 +14,15 @@ class eventName {
     this.date = date;
     this.description = description;
   }
-  createWidget() {}
+  createWidget() {
+    document.createElement("div");
+    populateData.classList.add("event__widget");
+    populateData.innerHTML = `
+        <h3 class="name">${this.name}</h3>
+        <p class="description">${this.description}</p>
+        <p class="date">${this.date}</p>
+        <button class="registration__button">Register</button>`;
+    const addingInfoToDiv = document.querySelector(".events");
+    addingInfoToDiv.appendChild(populateData);
+  }
 }
