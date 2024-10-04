@@ -1,0 +1,44 @@
+body {
+  width: 100wh;
+  height: 100vh;
+  background-color: #d8e8f2;
+}
+
+.my__modal {
+  display: block;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: rgb(160, 163, 203);
+  padding: 20px;
+  border: 1px solid #ccc;
+  z-index: 1000;
+}
+.my__modal.active {
+  display: block;
+}
+.events {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+.event__widget {
+  width: 30%;
+  padding: 10px;
+  background-color: #badeff;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+header {
+  background-color: #b1d2e6;
+}
+
+header nav {
+  display: flex;
+  justify-content: right;
+  gap: 30px;
+}
