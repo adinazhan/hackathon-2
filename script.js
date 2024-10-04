@@ -10,7 +10,7 @@ const getData = async () => {
   }
 };
 
-class eventName {
+class EventName {
   constructor(name, date, description) {
     this.name = name;
     this.date = date;
@@ -35,34 +35,46 @@ class eventName {
 
 getData().then((data) => {
   data.forEach((event) => {
-    new eventName(event.name, event.date, event.description);
+    new EventName(event.name, event.date, event.description);
   });
+  buttonRegistration(); // Initialize button events after elements are created
 });
 
 const myModal = () => {
-  const addingModalToDIv = document.querySelector(".events");
-  const docModal = document.createElement("div");
-  docModal.classList.add("my__modal");
-  docModal.innerHTML = `
-  <form action="">
-  <label for="fname">First name:</label>
-  <input type="text" id="fname" name="fname"><br><br>
-  <label for="lname">Surname:</label>
-  <input type="text" id="lname" name="lname"><br><br>
-  <label for="lname">Email:</label>
-  <input type="text" id="lname" name="lname"><br><br>
-  <label for="fname">Phone number:</label>
-  <input type="number" id="fname" name="fname"><br><br>
-  <label for="fname">I am old enough to participate</label>
-  <input type="checkbox" id="fname" name="fname"><br><br>
-  <input type="submit" value="Submit">
-</form>
-  `;
-  addingModalToDIv.appendChild(docModal);
+  const docModal = document.querySelector(".my__modal");
+
+    const addingModalToDiv = document.querySelector(".events");
+    const newModal = document.createElement("div");
+    newModal.classList.add("my__modal");
+    newModal.innerHTML = `
+      <form action="">
+        <label for="fname">First name:</label>
+        <input type="text" id="fname" name="fname"><br><br>
+
+        <label for="lname">Surname:</label>
+        <input type="text" id="lname" name="lname"><br><br>
+
+        <label for="email">Email:</label>
+        <input type="text" id="email" name="email"><br><br>
+
+        <label for="phone">Phone number:</label>
+        <input type="number" id="phone" name="phone"><br><br>
+
+        <label for="age">I am old enough to participate</label>
+        <input type="checkbox" id="age" name="age"><br><br>
+
+        <input type="submit" value="Submit">
+      </form>
+    `;
+    addingModalToDiv.appendChild(newModal);
 };
-myModal();
 
 const buttonRegistration = () => {
-  const myButton = document.querySelector(".registration__button");
-  myButton.addEventListener("click");
+  const buttons = document.querySelectorAll(".registration__button");
+  buttons.forEach(button => {
+    button.addEventListener("click", (e) => {
+      console.log("Register button clicked for event:", e.target.previousElementSibling.previousElementSibling.textContent);
+      myModal();
+    });
+  });
 };
