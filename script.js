@@ -20,8 +20,6 @@ class EventName {
     const addingInfoToDiv = document.querySelector(".events");
     const docEl = document.createElement("div");
     docEl.classList.add("event__widget");
-
-    // Adding event ID to the register button
     docEl.innerHTML = `
       <h3 class="name">${this.name}</h3>
       <p class="description">${this.description}</p>
@@ -36,13 +34,12 @@ getData().then((data) => {
   data.forEach((event) => {
     new EventName(event.id, event.name, event.date, event.description);
   });
-  buttonRegistration(); 
+  buttonRegistration();
 });
 
 const myModal = (eventId) => {
   const addingModalToDiv = document.querySelector(".events");
   const existingModal = document.querySelector(".my__modal");
-
 
   if (existingModal) {
     existingModal.remove();
@@ -71,7 +68,7 @@ const myModal = (eventId) => {
   const registrationForm = document.getElementById("registrationForm");
   registrationForm.addEventListener("submit", (e) => {
     e.preventDefault();
-    postData(eventId); 
+    postData(eventId);
   });
 };
 
@@ -79,27 +76,20 @@ const buttonRegistration = () => {
   const buttons = document.querySelectorAll(".registration__button");
   buttons.forEach((button) => {
     button.addEventListener("click", (e) => {
-      const eventId = button.getAttribute("data-id"); 
+      const eventId = button.getAttribute("data-id");
       myModal(eventId);
     });
   });
 };
 
-
 const postData = async (eventId) => {
   const url = `https://test-api.codingbootcamp.cz/api/4d66b532/events/${eventId}/registrations`;
 
-  
   const fname = document.getElementById("fname").value;
   const lname = document.getElementById("lname").value;
   const email = document.getElementById("email").value;
   const phone = document.getElementById("phone").value;
   const ageChecked = document.getElementById("age").checked;
-
-  if (!ageChecked) {
-    alert("You must confirm that you are old enough to participate.");
-    return;
-  }
 
   const myDataObject = {
     event_id: eventId,
@@ -109,22 +99,17 @@ const postData = async (eventId) => {
     phone: phone,
   };
 
-  try {
-    const response = await fetch(url, {
-      method: "POST",
-      body: JSON.stringify(myDataObject),
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
+  const response = await fetch(url, {
+    method: "POST",
+    body: JSON.stringify(myDataObject),
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
 
-    const result = await response.json();
-    console.log("Registration successful:", result);
+  const result = await response.json();
+  console.log("Registration successful:", result);
 
-
-    const modal = document.querySelector(".my__modal");
-    modal.style.display = "none";
-  } catch (error) {
-    console.error("Error during registration:", error);
-  }
+  const modal = document.querySelector(".my__modal");
+  modal.style.display = "none";
 };
